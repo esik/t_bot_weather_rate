@@ -23,48 +23,30 @@ async def daily(message: types.Message):
     pressure_mm = weater_json['fact']['pressure_mm']
 
     #get conditions
+    conditions = {
+    'clear': 'Ясно',
+    'partly-cloudy': 'Малооблачно',
+    'cloudy': 'Облачно с прояснениями',
+    'overcast': 'Пасмурно',
+    'drizzle': 'Морось',
+    'light-rain': 'Небольшой дождь',
+    'rain': 'Дождь',
+    'moderate-rain': 'Умеренно сильный дождь',
+    'heavy-rain': 'Сильный дождь',
+    'continuous-heavy-rain': 'Длительный сильный дождь',
+    'showers': 'Ливень',
+    'wet-snow': 'Дождь со снегом',
+    'light-snow': 'Небольшой снег',
+    'snow': 'Снег',
+    'snow-showers': 'Снегопад',
+    'hail': 'Град',
+    'thunderstorm': 'Гроза',
+    'thunderstorm-with-rain': 'Дождь с грозой',
+    'thunderstorm-with-hail': 'Гроза с градом'
+}
     fact_condition = weater_json['fact']['condition']
-    if fact_condition == 'clear':
-        fact_condition = 'Ясно'
-    elif fact_condition == 'partly-cloudy':
-        fact_condition = 'Малооблачно'
-    elif fact_condition == 'cloudy':
-        fact_condition = 'Облачно с прояснениями'
-    elif fact_condition == 'overcast':
-        fact_condition = 'Пасмурно'
-    elif fact_condition == 'drizzle':
-        fact_condition = 'Морось'
-    elif fact_condition == 'light-rain':
-        fact_condition = 'Небольшой дождь'
-    elif fact_condition == 'rain':
-       fact_condition = 'Дождь'
-    elif fact_condition == 'moderate-rain':
-        fact_condition = 'Умеренно сильный дождь'
-    elif fact_condition == 'heavy-rain':
-        fact_condition = 'Сильный дождь'
-    elif fact_condition == 'continuous-heavy-rain':
-        fact_condition = 'Длительный сильный дождь'
-    elif fact_condition == 'showers':
-        fact_condition = 'Ливень'
-    elif fact_condition == 'wet-snow':
-        fact_condition = 'Дождь со снегом'
-    elif fact_condition == 'light-snow':
-        fact_condition = 'Небольшой снег'
-    elif fact_condition == 'snow':
-        fact_condition = 'Снег'
-    elif fact_condition == 'snow-showers':
-        fact_condition = 'Снегопад'
-    elif fact_condition == 'hail':
-        fact_condition = 'Град'
-    elif fact_condition == 'thunderstorm':
-        fact_condition = 'Гроза'
-    elif fact_condition == 'thunderstorm-with-rain':
-        fact_condition = 'Дождь с грозой'
-    elif fact_condition == 'thunderstorm-with-hail':
-        fact_condition = 'Гроза с градом'
-    else:
-        fact_condition = 'Апокалипсис'
-
+    fact_condition = conditions.get(fact_condition, 'Апокалипсис')
+    
     #Get rates in currate.ru
     cursrate = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=***********") #put apikey currqate.ru
     rates =cursrate.json()
