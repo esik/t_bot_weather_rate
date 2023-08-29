@@ -1,1 +1,1 @@
-# t_bot_weather_rate
+# this is my first pet-project t-bot
